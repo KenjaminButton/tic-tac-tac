@@ -25,7 +25,20 @@
 
 A modern, web-based implementation of the classic Tic Tac Toe game. This project features a clean, responsive design and smooth gameplay mechanics. Players can enjoy the timeless game of X's and O's in their web browser.
 
-Features:
+### Screenshots
+
+<div align="center">
+  <h3>Player Name Selection</h3>
+  <img src="1.png" alt="Player Name Selection Screen" width="600"/>
+  
+  <h3>Gameplay</h3>
+  <img src="2.png" alt="Active Gameplay" width="600"/>
+  
+  <h3>Winning Celebration</h3>
+  <img src="3.png" alt="Winning Celebration Screen" width="600"/>
+</div>
+
+### Features:
 * Clean and intuitive user interface
 * Responsive design that works on both desktop and mobile
 * Real-time game state tracking
