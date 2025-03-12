@@ -3,6 +3,10 @@ let currentPlayer = 'X';  // Track current player (X or O)
 let gameBoard = ['', '', '', '', '', '', '', '', '']; // Represent the game board state
 let gameActive = true;  // Track if game is still active
 let playerName = ''; // Store player's name
+let scores = {
+    player: 0,
+    computer: 0
+};
 
 // Player Selection Logic
 const playerSelection = document.getElementById('playerSelection');
@@ -41,7 +45,7 @@ function handleMove(clickedCell, clickedCellIndex) {
     // Check if current player has won
     if (checkWin()) {
         celebrateWin();
-        const winner = currentPlayer === playerName.symbol ? playerName.name : 'Player 2';
+        const winner = currentPlayer === playerName.symbol ? playerName.name : 'Computer';
         status.textContent = `${winner} wins!`;
         gameActive = false;
         return;
@@ -83,6 +87,10 @@ function checkWin() {
             document.querySelector(`[data-index="${a}"]`).classList.add('winner');
             document.querySelector(`[data-index="${b}"]`).classList.add('winner');
             document.querySelector(`[data-index="${c}"]`).classList.add('winner');
+            
+            // Update scores
+            const winner = gameBoard[a] === playerName.symbol ? playerName.name : 'Computer';
+            updateScores(winner);
             return true;
         }
     }
@@ -108,28 +116,35 @@ function resetGame() {
 
 // Handle player symbol selection
 function handleSymbolSelection(symbol) {
-    // Validate name input
-    const name = playerNameInput.value.trim();
+    const nameInput = document.getElementById('playerName');
+    const name = nameInput.value.trim();
+    
     if (!name) {
         alert('Please enter your name first!');
         return;
     }
-    
-    // Store player info
+
     playerName = {
         name: name,
         symbol: symbol
     };
+
+    document.getElementById('playerSelection').style.display = 'none';
+    document.getElementById('gameContainer').style.display = 'block';
+    document.getElementById('playerName').textContent = name;
     
-    // Set the initial player
     currentPlayer = symbol;
-    
-    // Hide selection screen and show game board
-    playerSelection.style.display = 'none';
-    gameContainer.style.display = 'block';
-    
-    // Initialize the game with selected symbol
-    initGame();
+    updateStatus();
+}
+
+function updateScores(winner) {
+    if (winner === playerName.name) {
+        scores.player++;
+        document.getElementById('playerScore').textContent = scores.player;
+    } else if (winner === 'Computer') {
+        scores.computer++;
+        document.getElementById('computerScore').textContent = scores.computer;
+    }
 }
 
 // Add click event listeners to cells

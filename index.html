@@ -29,6 +29,15 @@
 
         <!-- Game board container (initially hidden) -->
         <div id="gameContainer" style="display: none;">
+            <!-- Score Board -->
+            <div id="scoreBoard" class="score-board">
+                <div class="score-item">
+                    <span id="playerName">Player</span>: <span id="playerScore">0</span>
+                </div>
+                <div class="score-item">
+                    <span>Computer</span>: <span id="computerScore">0</span>
+                </div>
+            </div>
             <div id="status" class="status"></div>
             <div id="board" class="board">
                 <div class="cell" data-index="0"></div>
