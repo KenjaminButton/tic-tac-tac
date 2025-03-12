@@ -131,7 +131,7 @@ function handleSymbolSelection(symbol) {
 
     document.getElementById('playerSelection').style.display = 'none';
     document.getElementById('gameContainer').style.display = 'block';
-    document.getElementById('playerName').textContent = name;
+    document.getElementById('playerNameDisplay').textContent = name;
     
     currentPlayer = symbol;
     updateStatus();
