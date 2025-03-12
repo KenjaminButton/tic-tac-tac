@@ -107,9 +107,9 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Contact
 
-Kenneth Chang - [@KenjaminButton](https://github.com/KenjaminButton)
+Kenneth Chang - [@KenjaminButton](https://kenjaminbutton.com/contact)
 
-Project Link: [https://github.com/KenjaminButton/tic-tac-tac](https://github.com/KenjaminButton/tic-tac-tac)
+Project Link: [https://tic-tac-tac.vercel.app/](https://tic-tac-tac.vercel.app/)
 
 ## Acknowledgments
 
