@@ -84,8 +84,8 @@ Hosted using [Vercel](https://vercel.com/), providing:
 - [x] Basic game implementation
 - [x] Win detection
 - [x] Game reset functionality
-- [ ] Add score tracking
-- [ ] Add player name customization
+- [x] Add score tracking
+- [x] Add player name customization
 - [ ] Implement AI opponent
 - [ ] Add game history
 
