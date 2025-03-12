@@ -2,12 +2,14 @@
 let currentPlayer = 'X';  // Track current player (X or O)
 let gameBoard = ['', '', '', '', '', '', '', '', '']; // Represent the game board state
 let gameActive = true;  // Track if game is still active
+let playerName = ''; // Store player's name
 
 // Player Selection Logic
 const playerSelection = document.getElementById('playerSelection');
 const gameContainer = document.getElementById('gameContainer');
 const chooseXButton = document.getElementById('chooseX');
 const chooseOButton = document.getElementById('chooseO');
+const playerNameInput = document.getElementById('playerName');
 
 // Get DOM elements
 const board = document.getElementById('board');
@@ -16,7 +18,8 @@ const resetButton = document.getElementById('resetBtn');
 
 // Update the status message to show current player
 function updateStatus() {
-    status.textContent = `Player ${currentPlayer}'s turn`;
+    const currentPlayerName = currentPlayer === playerName.symbol ? playerName.name : 'Player 2';
+    status.textContent = `${currentPlayerName}'s turn (${currentPlayer})`;
 }
 
 // Initialize the game
@@ -37,7 +40,8 @@ function handleMove(clickedCell, clickedCellIndex) {
 
     // Check if current player has won
     if (checkWin()) {
-        status.textContent = `Player ${currentPlayer} wins!`;
+        const winner = currentPlayer === playerName.symbol ? playerName.name : 'Player 2';
+        status.textContent = `${winner} wins!`;
         gameActive = false;
         return;
     }
@@ -97,7 +101,20 @@ function resetGame() {
 
 // Handle player symbol selection
 function handleSymbolSelection(symbol) {
-    // Set the initial player based on selection
+    // Validate name input
+    const name = playerNameInput.value.trim();
+    if (!name) {
+        alert('Please enter your name first!');
+        return;
+    }
+    
+    // Store player info
+    playerName = {
+        name: name,
+        symbol: symbol
+    };
+    
+    // Set the initial player
     currentPlayer = symbol;
     
     // Hide selection screen and show game board
