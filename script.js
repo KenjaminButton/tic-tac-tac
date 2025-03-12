@@ -5,7 +5,8 @@ let gameActive = true;  // Track if game is still active
 let playerName = ''; // Store player's name
 let scores = {
     player: 0,
-    computer: 0
+    computer: 0,
+    draws: 0
 };
 let celebrationTimers = []; // Store celebration timeouts
 
@@ -49,13 +50,15 @@ function handleMove(clickedCell, clickedCellIndex) {
         const winner = currentPlayer === playerName.symbol ? playerName.name : 'Computer';
         status.textContent = `${winner} wins!`;
         gameActive = false;
+        updateScores(winner);
         return;
     }
 
-    // Check if game is a draw
-    if (checkDraw()) {
+    // Check for draw
+    if (gameBoard.every(cell => cell !== '')) {
         status.textContent = "Game is a draw!";
         gameActive = false;
+        updateScores('draw');
         return;
     }
 
@@ -152,6 +155,9 @@ function updateScores(winner) {
     } else if (winner === 'Computer') {
         scores.computer++;
         document.getElementById('computerScore').textContent = scores.computer;
+    } else if (winner === 'draw') {
+        scores.draws++;
+        document.getElementById('drawScore').textContent = scores.draws;
     }
 }
 
