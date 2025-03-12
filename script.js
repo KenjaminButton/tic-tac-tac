@@ -40,6 +40,7 @@ function handleMove(clickedCell, clickedCellIndex) {
 
     // Check if current player has won
     if (checkWin()) {
+        celebrateWin();
         const winner = currentPlayer === playerName.symbol ? playerName.name : 'Player 2';
         status.textContent = `${winner} wins!`;
         gameActive = false;
@@ -136,6 +137,52 @@ resetButton.addEventListener('click', resetGame);
 // Add click handlers for symbol selection
 chooseXButton.addEventListener('click', () => handleSymbolSelection('X'));
 chooseOButton.addEventListener('click', () => handleSymbolSelection('O'));
+
+// Function to celebrate a win
+function celebrateWin() {
+    // Create multiple bursts of confetti
+    const count = 200;
+    const defaults = {
+        origin: { y: 0.7 },
+        spread: 360,
+        ticks: 50,
+        gravity: 0,
+        decay: 0.94,
+        startVelocity: 30,
+    };
+
+    function fire(particleRatio, opts) {
+        confetti({
+            ...defaults,
+            ...opts,
+            particleCount: Math.floor(count * particleRatio),
+        });
+    }
+
+    // Launch confetti in a circular pattern
+    fire(0.25, {
+        spread: 26,
+        startVelocity: 55,
+    });
+    fire(0.2, {
+        spread: 60,
+    });
+    fire(0.35, {
+        spread: 100,
+        decay: 0.91,
+        scalar: 0.8,
+    });
+    fire(0.1, {
+        spread: 120,
+        startVelocity: 25,
+        decay: 0.92,
+        scalar: 1.2,
+    });
+    fire(0.1, {
+        spread: 120,
+        startVelocity: 45,
+    });
+}
 
 // Start the game
 // initGame();
