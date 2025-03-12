@@ -64,7 +64,7 @@ function handleMove(clickedCell, clickedCellIndex) {
     }
 
     // Computer's turn
-    currentPlayer = 'O';
+    currentPlayer = playerName.symbol === 'X' ? 'O' : 'X';
     updateStatus();
     
     // Add a small delay before computer moves
@@ -87,9 +87,10 @@ function makeComputerMove() {
     const randomIndex = Math.floor(Math.random() * emptyCells.length);
     const cellIndex = emptyCells[randomIndex];
 
-    // Make the move
-    gameBoard[cellIndex] = 'O';
-    document.querySelector(`[data-index="${cellIndex}"]`).textContent = 'O';
+    // Make the move with opposite symbol of player
+    const computerSymbol = playerName.symbol === 'X' ? 'O' : 'X';
+    gameBoard[cellIndex] = computerSymbol;
+    document.querySelector(`[data-index="${cellIndex}"]`).textContent = computerSymbol;
 
     // Check if computer has won
     if (checkWin()) {
