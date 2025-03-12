@@ -38,12 +38,35 @@ A modern, web-based implementation of the classic Tic Tac Toe game. This project
   <img src="images/3.png" alt="Winning Celebration Screen" width="600"/>
 </div>
 
-### Features:
-* Clean and intuitive user interface
-* Responsive design that works on both desktop and mobile
+### Features
+
+#### Game Mechanics
+* Smart computer opponent with natural move delays
+* Player choice of X or O symbol
+* Automatic win and draw detection
 * Real-time game state tracking
-* Win detection and game reset functionality
-* Turn indicator and game status display
+* Quick game reset functionality
+
+#### User Interface
+* Clean and modern design
+* Responsive layout for all devices
+* Interactive cell hover effects
+* Animated button feedback
+* Clear turn indicators
+
+#### Player Experience
+* Personalized gameplay with custom names
+* Live score tracking system
+* Separate counters for wins, losses, and draws
+* Visual winning line indication
+* Celebratory confetti animation on wins
+
+#### Technical Implementation
+* Pure JavaScript without external dependencies
+* Efficient game state management
+* Modular code structure
+* Fast loading and performance
+* Cross-browser compatibility
 
 ### Built With
 
