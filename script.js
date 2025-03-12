@@ -24,8 +24,11 @@ const resetButton = document.getElementById('resetBtn');
 
 // Update the status message to show current player
 function updateStatus() {
-    const currentPlayerName = currentPlayer === playerName.symbol ? playerName.name : 'Player 2';
-    status.textContent = `${currentPlayerName}'s turn (${currentPlayer})`;
+    if (currentPlayer === playerName.symbol) {
+        status.textContent = `${playerName.name}'s turn`;
+    } else {
+        status.textContent = "Computer's turn";
+    }
 }
 
 // Initialize the game
@@ -35,22 +38,20 @@ function initGame() {
 
 // Handle a player's move
 function handleMove(clickedCell, clickedCellIndex) {
-    // If cell is already filled or game is not active, ignore the click
     if (gameBoard[clickedCellIndex] !== '' || !gameActive) {
         return;
     }
 
-    // Update the game board and cell display
+    // Player's move
     gameBoard[clickedCellIndex] = currentPlayer;
     clickedCell.textContent = currentPlayer;
 
-    // Check if current player has won
+    // Check if player has won
     if (checkWin()) {
         celebrateWin();
-        const winner = currentPlayer === playerName.symbol ? playerName.name : 'Computer';
-        status.textContent = `${winner} wins!`;
+        status.textContent = `${playerName.name} wins!`;
         gameActive = false;
-        updateScores(winner);
+        updateScores(playerName.name);
         return;
     }
 
@@ -62,8 +63,53 @@ function handleMove(clickedCell, clickedCellIndex) {
         return;
     }
 
-    // Switch to next player
-    currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+    // Computer's turn
+    currentPlayer = 'O';
+    updateStatus();
+    
+    // Add a small delay before computer moves
+    setTimeout(makeComputerMove, 500);
+}
+
+// Make computer move
+function makeComputerMove() {
+    // Get all empty cells
+    const emptyCells = gameBoard.reduce((acc, cell, index) => {
+        if (cell === '') {
+            acc.push(index);
+        }
+        return acc;
+    }, []);
+
+    if (emptyCells.length === 0) return;
+
+    // Pick a random empty cell
+    const randomIndex = Math.floor(Math.random() * emptyCells.length);
+    const cellIndex = emptyCells[randomIndex];
+
+    // Make the move
+    gameBoard[cellIndex] = 'O';
+    document.querySelector(`[data-index="${cellIndex}"]`).textContent = 'O';
+
+    // Check if computer has won
+    if (checkWin()) {
+        celebrateWin();
+        status.textContent = 'Computer wins!';
+        gameActive = false;
+        updateScores('Computer');
+        return;
+    }
+
+    // Check for draw
+    if (gameBoard.every(cell => cell !== '')) {
+        status.textContent = "Game is a draw!";
+        gameActive = false;
+        updateScores('draw');
+        return;
+    }
+
+    // Switch back to player's turn
+    currentPlayer = playerName.symbol;
     updateStatus();
 }
 
