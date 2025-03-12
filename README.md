@@ -94,13 +94,53 @@ Hosted using [Vercel](https://vercel.com/), providing:
 
 ## Roadmap
 
-- [x] Basic game implementation
-- [x] Win detection
-- [x] Game reset functionality
-- [x] Add score tracking
-- [x] Add player name customization
-- [x] Implement AI opponent
-- [x] Add game history
+Our development journey followed these major milestones:
+
+### Phase 1: Core Game Implementation 
+- [x] Create basic game board layout
+- [x] Implement cell click handlers
+- [x] Add game state management
+- [x] Develop win detection algorithm
+- [x] Add draw game detection
+- [x] Implement game reset functionality
+
+### Phase 2: Player Experience 
+- [x] Add player name input
+- [x] Create symbol selection (X/O)
+- [x] Implement turn indicators
+- [x] Add game status messages
+- [x] Create score tracking system
+- [x] Display player names in scoreboard
+
+### Phase 3: Computer Opponent 
+- [x] Implement computer move logic
+- [x] Add delay for natural gameplay feel
+- [x] Ensure computer uses correct symbol
+- [x] Handle computer win scenarios
+- [x] Prevent player moves during computer turn
+
+### Phase 4: Visual Enhancements 
+- [x] Add winning line visualization
+- [x] Implement confetti celebration
+- [x] Style score board display
+- [x] Create responsive design
+- [x] Add hover effects on cells
+- [x] Improve button animations
+
+### Phase 5: Score System 
+- [x] Track player wins
+- [x] Track computer wins
+- [x] Count draw games
+- [x] Persist scores during session
+- [x] Display real-time score updates
+
+### Future Enhancements 
+- [ ] Add sound effects
+- [ ] Implement difficulty levels
+- [ ] Save high scores
+- [ ] Add multiplayer support
+- [ ] Create game statistics
+- [ ] Add theme customization
 
 See the [open issues](https://github.com/KenjaminButton/tic-tac-tac/issues) for a full list of proposed features and known issues.
 
