@@ -7,6 +7,7 @@ let scores = {
     player: 0,
     computer: 0
 };
+let celebrationTimers = []; // Store celebration timeouts
 
 // Player Selection Logic
 const playerSelection = document.getElementById('playerSelection');
@@ -104,6 +105,13 @@ function checkDraw() {
 
 // Reset the game
 function resetGame() {
+    // Clear all scheduled confetti bursts
+    celebrationTimers.forEach(timer => clearTimeout(timer));
+    celebrationTimers = [];
+    
+    // Stop any current confetti
+    confetti.reset();
+    
     gameBoard = ['', '', '', '', '', '', '', '', ''];
     gameActive = true;
     currentPlayer = playerName.symbol;
@@ -112,9 +120,6 @@ function resetGame() {
         cell.classList.remove('winner'); // Remove winner highlight
     });
     updateStatus();
-    
-    // Stop any ongoing confetti animation
-    confetti.reset();
 }
 
 // Handle player symbol selection
@@ -185,7 +190,7 @@ function celebrateWin() {
 
     // Function to create one round of celebrations
     function celebrationRound(delay) {
-        setTimeout(() => {
+        const timer = setTimeout(() => {
             fire(0.25, {
                 spread: 26,
                 startVelocity: 55,
@@ -209,6 +214,7 @@ function celebrateWin() {
                 startVelocity: 45,
             });
         }, delay);
+        celebrationTimers.push(timer);
     }
 
     // Trigger 5 rounds of celebration with delays
