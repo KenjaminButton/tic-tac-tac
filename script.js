@@ -91,10 +91,6 @@ function checkWin() {
             document.querySelector(`[data-index="${a}"]`).classList.add('winner');
             document.querySelector(`[data-index="${b}"]`).classList.add('winner');
             document.querySelector(`[data-index="${c}"]`).classList.add('winner');
-            
-            // Update scores
-            const winner = gameBoard[a] === playerName.symbol ? playerName.name : 'Computer';
-            updateScores(winner);
             return true;
         }
     }
