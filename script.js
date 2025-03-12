@@ -140,14 +140,14 @@ chooseOButton.addEventListener('click', () => handleSymbolSelection('O'));
 
 // Function to celebrate a win
 function celebrateWin() {
-    // Create multiple bursts of confetti
+    // Create multiple bursts of confetti that repeat
     const count = 200;
     const defaults = {
         origin: { y: 0.7 },
         spread: 360,
-        ticks: 50,
+        ticks: 100,  // Increased ticks for longer duration
         gravity: 0,
-        decay: 0.94,
+        decay: 0.97, // Slower decay for longer-lasting confetti
         startVelocity: 30,
     };
 
@@ -159,29 +159,38 @@ function celebrateWin() {
         });
     }
 
-    // Launch confetti in a circular pattern
-    fire(0.25, {
-        spread: 26,
-        startVelocity: 55,
-    });
-    fire(0.2, {
-        spread: 60,
-    });
-    fire(0.35, {
-        spread: 100,
-        decay: 0.91,
-        scalar: 0.8,
-    });
-    fire(0.1, {
-        spread: 120,
-        startVelocity: 25,
-        decay: 0.92,
-        scalar: 1.2,
-    });
-    fire(0.1, {
-        spread: 120,
-        startVelocity: 45,
-    });
+    // Function to create one round of celebrations
+    function celebrationRound(delay) {
+        setTimeout(() => {
+            fire(0.25, {
+                spread: 26,
+                startVelocity: 55,
+            });
+            fire(0.2, {
+                spread: 60,
+            });
+            fire(0.35, {
+                spread: 100,
+                decay: 0.94,
+                scalar: 0.8,
+            });
+            fire(0.1, {
+                spread: 120,
+                startVelocity: 25,
+                decay: 0.95,
+                scalar: 1.2,
+            });
+            fire(0.1, {
+                spread: 120,
+                startVelocity: 45,
+            });
+        }, delay);
+    }
+
+    // Trigger 5 rounds of celebration with delays
+    for (let i = 0; i < 5; i++) {
+        celebrationRound(i * 1500); // Space out each round by 1.5 seconds
+    }
 }
 
 // Start the game
