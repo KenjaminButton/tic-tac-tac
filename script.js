@@ -112,6 +112,9 @@ function resetGame() {
         cell.classList.remove('winner'); // Remove winner highlight
     });
     updateStatus();
+    
+    // Stop any ongoing confetti animation
+    confetti.reset();
 }
 
 // Handle player symbol selection
