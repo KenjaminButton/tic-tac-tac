@@ -9,7 +9,7 @@
     <a href="https://github.com/KenjaminButton/tic-tac-toe"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/KenjaminButton/tic-tac-toe">View Demo</a>
+    <a href="https://tic-tac-qngj2sm22-kenjaminbuttons-projects.vercel.app/">Play Live Demo</a>
     ·
     <a href="https://github.com/KenjaminButton/tic-tac-toe/issues">Report Bug</a>
     ·
@@ -64,6 +64,16 @@ To get a local copy up and running, follow these simple steps.
 2. Players take turns clicking on the grid to place their X or O
 3. The game will automatically detect wins or draws
 4. Click the reset button to start a new game
+
+## Deployment
+
+The game is live and playable at: [Tic Tac Toe Live Demo](https://tic-tac-qngj2sm22-kenjaminbuttons-projects.vercel.app/)
+
+Hosted using [Vercel](https://vercel.com/), providing:
+* Fast loading times
+* Automatic HTTPS
+* Global CDN distribution
+* Zero-configuration deployment
 
 ## Roadmap
 
