@@ -9,8 +9,12 @@
     <a href="https://github.com/KenjaminButton/tic-tac-toe"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://tic-tac-qngj2sm22-kenjaminbuttons-projects.vercel.app/">Play Live Demo</a>
-    ·
+    <h2>
+      <a href="https://tic-tac-qngj2sm22-kenjaminbuttons-projects.vercel.app/" style="font-size: 24px;">
+        🎮 PLAY LIVE DEMO 🎮
+      </a>
+    </h2>
+    <br />
     <a href="https://github.com/KenjaminButton/tic-tac-toe/issues">Report Bug</a>
     ·
     <a href="https://github.com/KenjaminButton/tic-tac-toe/issues">Request Feature</a>
