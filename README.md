@@ -5,7 +5,7 @@
 
   <p align="center">
     <h2>
-      <a href="https://tic-tac-qngj2sm22-kenjaminbuttons-projects.vercel.app/" style="font-size: 24px;">
+      <a href="https://tic-tac-tac.vercel.app/" style="font-size: 24px;">
         🎮 PLAY LIVE DEMO 🎮
       </a>
     </h2>
@@ -71,7 +71,7 @@ To get a local copy up and running, follow these simple steps.
 
 ## Deployment
 
-The game is live and playable at: [Tic Tac Toe Live Demo](https://tic-tac-qngj2sm22-kenjaminbuttons-projects.vercel.app/)
+The game is live and playable at: [Tic Tac Toe Live Demo](https://tic-tac-tac.vercel.app/)
 
 Hosted using [Vercel](https://vercel.com/), providing:
 * Fast loading times
@@ -86,8 +86,8 @@ Hosted using [Vercel](https://vercel.com/), providing:
 - [x] Game reset functionality
 - [x] Add score tracking
 - [x] Add player name customization
-- [ ] Implement AI opponent
-- [ ] Add game history
+- [x] Implement AI opponent
+- [x] Add game history
 
 See the [open issues](https://github.com/KenjaminButton/tic-tac-toe/issues) for a full list of proposed features and known issues.
 
