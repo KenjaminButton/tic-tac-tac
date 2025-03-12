@@ -4,16 +4,16 @@
   <h3 align="center">Kenjamin Button's Classic Tic Tac Toe</h3>
 
   <p align="center">
-    A modern implementation of the classic Tic Tac Toe game using HTML, CSS, and JavaScript
-    <br />
-    <a href="https://github.com/KenjaminButton/tic-tac-toe"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
     <h2>
       <a href="https://tic-tac-qngj2sm22-kenjaminbuttons-projects.vercel.app/" style="font-size: 24px;">
         🎮 PLAY LIVE DEMO 🎮
       </a>
     </h2>
+    <br />
+    A modern implementation of the classic Tic Tac Toe game using HTML, CSS, and JavaScript
+    <br />
+    <a href="https://github.com/KenjaminButton/tic-tac-toe"><strong>Explore the docs »</strong></a>
+    <br />
     <br />
     <a href="https://github.com/KenjaminButton/tic-tac-toe/issues">Report Bug</a>
     ·
