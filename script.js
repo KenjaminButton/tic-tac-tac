@@ -61,7 +61,7 @@ function handleMove(clickedCell, clickedCellIndex) {
 
 // Check for win conditions
 function checkWin() {
-    const winConditions = [
+    const winningConditions = [
         [0, 1, 2], // Top row
         [3, 4, 5], // Middle row
         [6, 7, 8], // Bottom row
@@ -72,13 +72,21 @@ function checkWin() {
         [2, 4, 6]  // Diagonal from top-right
     ];
 
-    // Check each winning combination
-    return winConditions.some(combination => {
-        const [a, b, c] = combination;
-        return gameBoard[a] !== '' &&
-               gameBoard[a] === gameBoard[b] &&
-               gameBoard[a] === gameBoard[c];
-    });
+    for (let i = 0; i <= 7; i++) {
+        const [a, b, c] = winningConditions[i];
+        if (
+            gameBoard[a] !== '' &&
+            gameBoard[a] === gameBoard[b] &&
+            gameBoard[a] === gameBoard[c]
+        ) {
+            // Highlight winning cells
+            document.querySelector(`[data-index="${a}"]`).classList.add('winner');
+            document.querySelector(`[data-index="${b}"]`).classList.add('winner');
+            document.querySelector(`[data-index="${c}"]`).classList.add('winner');
+            return true;
+        }
+    }
+    return false;
 }
 
 // Check if game is a draw
@@ -88,15 +96,13 @@ function checkDraw() {
 
 // Reset the game
 function resetGame() {
-    currentPlayer = 'X';
     gameBoard = ['', '', '', '', '', '', '', '', ''];
     gameActive = true;
-    
-    // Clear all cells
+    currentPlayer = playerName.symbol;
     document.querySelectorAll('.cell').forEach(cell => {
         cell.textContent = '';
+        cell.classList.remove('winner'); // Remove winner highlight
     });
-    
     updateStatus();
 }
 

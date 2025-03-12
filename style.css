@@ -58,6 +58,12 @@ h1 {
     cursor: pointer;
 }
 
+/* Winning cell highlight */
+.cell.winner {
+    background-color: rgba(255, 0, 0, 0.2);
+    border: 2px solid red;
+}
+
 /* Player Selection Screen */
 .player-selection {
     text-align: center;
