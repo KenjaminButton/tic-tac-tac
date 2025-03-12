@@ -11,6 +11,20 @@ body {
 
 .container {
     text-align: center;
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 30px;
+    font-size: 2.5em;
+    text-align: center;
+    width: 100%;
 }
 
 /* Game board styles */
@@ -19,6 +33,8 @@ body {
     grid-template-columns: repeat(3, 100px);
     gap: 5px;
     margin: 20px auto;
+    justify-content: center;
+    width: fit-content;
 }
 
 /* Individual cell styles */

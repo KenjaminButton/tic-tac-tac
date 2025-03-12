@@ -1,7 +1,7 @@
-# Tic Tac Toe Game
+# Kenjamin Button's Tic Tac Toe Game
 
 <div align="center">
-  <h3 align="center">Classic Tic Tac Toe</h3>
+  <h3 align="center">Kenjamin Button's Classic Tic Tac Toe</h3>
 
   <p align="center">
     A modern implementation of the classic Tic Tac Toe game using HTML, CSS, and JavaScript
