@@ -29,13 +29,13 @@ A modern, web-based implementation of the classic Tic Tac Toe game. This project
 
 <div align="center">
   <h3>Player Name Selection</h3>
-  <img src="1.png" alt="Player Name Selection Screen" width="600"/>
+  <img src="images/1.png" alt="Player Name Selection Screen" width="600"/>
   
   <h3>Gameplay</h3>
-  <img src="2.png" alt="Active Gameplay" width="600"/>
+  <img src="images/2.png" alt="Active Gameplay" width="600"/>
   
   <h3>Winning Celebration</h3>
-  <img src="3.png" alt="Winning Celebration Screen" width="600"/>
+  <img src="images/3.png" alt="Winning Celebration Screen" width="600"/>
 </div>
 
 ### Features:
