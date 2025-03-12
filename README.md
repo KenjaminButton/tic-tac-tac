@@ -12,12 +12,12 @@
     <br />
     A modern implementation of the classic Tic Tac Toe game using HTML, CSS, and JavaScript
     <br />
-    <a href="https://github.com/KenjaminButton/tic-tac-toe"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/KenjaminButton/tic-tac-tac"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/KenjaminButton/tic-tac-toe/issues">Report Bug</a>
+    <a href="https://github.com/KenjaminButton/tic-tac-tac/issues">Report Bug</a>
     ·
-    <a href="https://github.com/KenjaminButton/tic-tac-toe/issues">Request Feature</a>
+    <a href="https://github.com/KenjaminButton/tic-tac-tac/issues">Request Feature</a>
   </p>
 </div>
 
@@ -51,11 +51,11 @@ To get a local copy up and running, follow these simple steps.
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/KenjaminButton/tic-tac-toe.git
+   git clone https://github.com/KenjaminButton/tic-tac-tac.git
    ```
 2. Navigate to the project directory
    ```sh
-   cd tic-tac-toe
+   cd tic-tac-tac
    ```
 3. Open index.html in your web browser
    ```sh
@@ -89,7 +89,7 @@ Hosted using [Vercel](https://vercel.com/), providing:
 - [x] Implement AI opponent
 - [x] Add game history
 
-See the [open issues](https://github.com/KenjaminButton/tic-tac-toe/issues) for a full list of proposed features and known issues.
+See the [open issues](https://github.com/KenjaminButton/tic-tac-tac/issues) for a full list of proposed features and known issues.
 
 ## Contributing
 
@@ -109,7 +109,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 Kenneth Chang - [@KenjaminButton](https://github.com/KenjaminButton)
 
-Project Link: [https://github.com/KenjaminButton/tic-tac-toe](https://github.com/KenjaminButton/tic-tac-toe)
+Project Link: [https://github.com/KenjaminButton/tic-tac-tac](https://github.com/KenjaminButton/tic-tac-tac)
 
 ## Acknowledgments
 
