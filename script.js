@@ -3,6 +3,12 @@ let currentPlayer = 'X';  // Track current player (X or O)
 let gameBoard = ['', '', '', '', '', '', '', '', '']; // Represent the game board state
 let gameActive = true;  // Track if game is still active
 
+// Player Selection Logic
+const playerSelection = document.getElementById('playerSelection');
+const gameContainer = document.getElementById('gameContainer');
+const chooseXButton = document.getElementById('chooseX');
+const chooseOButton = document.getElementById('chooseO');
+
 // Get DOM elements
 const board = document.getElementById('board');
 const status = document.getElementById('status');
@@ -89,6 +95,19 @@ function resetGame() {
     updateStatus();
 }
 
+// Handle player symbol selection
+function handleSymbolSelection(symbol) {
+    // Set the initial player based on selection
+    currentPlayer = symbol;
+    
+    // Hide selection screen and show game board
+    playerSelection.style.display = 'none';
+    gameContainer.style.display = 'block';
+    
+    // Initialize the game with selected symbol
+    initGame();
+}
+
 // Add click event listeners to cells
 document.querySelectorAll('.cell').forEach((cell, index) => {
     cell.addEventListener('click', () => handleMove(cell, index));
@@ -97,5 +116,9 @@ document.querySelectorAll('.cell').forEach((cell, index) => {
 // Add click event listener to reset button
 resetButton.addEventListener('click', resetGame);
 
+// Add click handlers for symbol selection
+chooseXButton.addEventListener('click', () => handleSymbolSelection('X'));
+chooseOButton.addEventListener('click', () => handleSymbolSelection('O'));
+
 // Start the game
-initGame();
+// initGame();
