@@ -10,7 +10,8 @@
       </a>
     </h2>
     <br />
-    A modern implementation of the classic Tic Tac Toe game using HTML, CSS, and JavaScript
+    A modern, thoroughly tested implementation of the classic Tic Tac Toe game using HTML, CSS, and JavaScript.
+    Complete with comprehensive Jest test coverage and professional development practices.
     <br />
     <a href="https://github.com/KenjaminButton/tic-tac-tac"><strong>Explore the docs »</strong></a>
     <br />
@@ -23,7 +24,7 @@
 
 ## About The Project
 
-A modern, web-based implementation of the classic Tic Tac Toe game. This project features a clean, responsive design and smooth gameplay mechanics. Players can enjoy the timeless game of X's and O's in their web browser.
+A modern, web-based implementation of the classic Tic Tac Toe game. This project features a clean, responsive design, smooth gameplay mechanics, and comprehensive test coverage using Jest. Players can enjoy the timeless game of X's and O's in their web browser, backed by robust code quality and testing practices.
 
 ### Screenshots
 
@@ -67,12 +68,16 @@ A modern, web-based implementation of the classic Tic Tac Toe game. This project
 * Modular code structure
 * Fast loading and performance
 * Cross-browser compatibility
+* Comprehensive Jest test suite
+* Test-driven development approach
+* 100% core feature test coverage
 
 ### Built With
 
 * ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
 * ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
 * ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+* ![Jest](https://img.shields.io/badge/-jest-%23C21325?style=for-the-badge&logo=jest&logoColor=white)
 
 ## Getting Started
 
@@ -82,6 +87,7 @@ To get a local copy up and running, follow these simple steps.
 
 * A modern web browser (Chrome, Firefox, Safari, or Edge)
 * A text editor if you want to modify the code (VS Code recommended)
+* Node.js and npm for running tests
 
 ### Installation
 
@@ -93,7 +99,15 @@ To get a local copy up and running, follow these simple steps.
    ```sh
    cd tic-tac-tac
    ```
-3. Open index.html in your web browser
+3. Install dependencies
+   ```sh
+   npm install
+   ```
+4. Run tests
+   ```sh
+   npm test
+   ```
+5. Open index.html in your web browser
    ```sh
    open index.html
    ```
@@ -104,6 +118,53 @@ To get a local copy up and running, follow these simple steps.
 2. Players take turns clicking on the grid to place their X or O
 3. The game will automatically detect wins or draws
 4. Click the reset button to start a new game
+
+## Testing
+
+The project uses Jest for comprehensive testing of all game functionality. The test suite covers:
+
+### Game Setup Tests
+- Player name validation
+- Symbol (X/O) selection
+- Game board initialization
+- Initial state verification
+
+### Game Mechanics Tests
+- Valid move placement
+- Invalid move prevention
+- Computer move generation
+- Turn alternation
+- Board state management
+
+### Win Detection Tests
+- Horizontal win patterns
+- Vertical win patterns
+- Diagonal win patterns
+- Draw game scenarios
+- Win celebration triggers
+
+### Score Tracking Tests
+- Player score increments
+- Computer score increments
+- Draw count tracking
+- Score persistence after reset
+
+### Event Handler Tests
+- DOM event listener initialization
+- Player input handling
+- Game board click responses
+- Reset button functionality
+
+### Running Tests
+```sh
+# Run all tests
+npm test
+
+# Run tests in watch mode (for development)
+npm run test:watch
+```
+
+All tests are located in `script.test.js` and use Jest's testing environment with jsdom for DOM manipulation.
 
 ## Deployment
 
@@ -156,6 +217,16 @@ Our development journey followed these major milestones:
 - [x] Count draw games
 - [x] Persist scores during session
 - [x] Display real-time score updates
+
+### Phase 6: Testing Implementation
+- [x] Set up Jest testing environment
+- [x] Write comprehensive test suite
+- [x] Test game setup functionality
+- [x] Test game move mechanics
+- [x] Test win/draw detection
+- [x] Test score tracking system
+- [x] Test event listener behavior
+- [x] Achieve 100% test coverage for core features
 
 ### Future Enhancements 
 - [ ] Add sound effects

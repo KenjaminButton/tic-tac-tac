@@ -1,276 +1,222 @@
-// Initialize game variables
-let currentPlayer = 'X';  // Track current player (X or O)
-let gameBoard = ['', '', '', '', '', '', '', '', '']; // Represent the game board state
-let gameActive = true;  // Track if game is still active
-let playerName = ''; // Store player's name
-let scores = {
-    player: 0,
-    computer: 0,
-    draws: 0
+// =============== GAME VARIABLES ===============
+// Store all the important game information
+export const gameState = {
+    board: ['', '', '', '', '', '', '', '', ''], // Empty board (9 cells)
+    isActive: true,                              // Is game still being played?
+    scores: {
+        player: 0,
+        computer: 0,
+        draws: 0
+    },
+    player: {
+        name: '',
+        symbol: ''  // Will be 'X' or 'O'
+    },
+    computerSymbol: '',  // Will be opposite of player's symbol
+    isPlayerTurn: true   // Track whose turn it is
 };
-let celebrationTimers = []; // Store celebration timeouts
 
-// Player Selection Logic
-const playerSelection = document.getElementById('playerSelection');
-const gameContainer = document.getElementById('gameContainer');
-const chooseXButton = document.getElementById('chooseX');
-const chooseOButton = document.getElementById('chooseO');
-const playerNameInput = document.getElementById('playerName');
-
-// Get DOM elements
-const board = document.getElementById('board');
-const status = document.getElementById('status');
-const resetButton = document.getElementById('resetBtn');
-
-// Update the status message to show current player
-function updateStatus() {
-    if (currentPlayer === playerName.symbol) {
-        status.textContent = `${playerName.name}'s turn`;
-    } else {
-        status.textContent = "Computer's turn";
+// =============== DOM ELEMENTS ===============
+// Get all the HTML elements we need to work with
+export const elements = {
+    cells: document.querySelectorAll('.cell'),           // All game board cells
+    status: document.getElementById('status'),           // Game status message
+    resetBtn: document.getElementById('resetBtn'),       // Reset game button
+    playerSetup: document.getElementById('playerSelection'), // Player setup screen
+    gameBoard: document.getElementById('gameContainer'),     // Main game screen
+    nameInput: document.getElementById('playerName'),        // Player name input
+    scoreDisplay: {
+        player: document.getElementById('playerScore'),
+        computer: document.getElementById('computerScore'),
+        draws: document.getElementById('drawScore'),
+        nameDisplay: document.getElementById('playerNameDisplay')
     }
-}
+};
 
-// Initialize the game
-function initGame() {
-    updateStatus();
-}
-
-// Handle a player's move
-function handleMove(clickedCell, clickedCellIndex) {
-    if (gameBoard[clickedCellIndex] !== '' || !gameActive) {
-        return;
+// =============== GAME SETUP ===============
+// Handle when player chooses X or O
+export function startGame(chosenSymbol) {
+    // Make sure player entered their name
+    const playerName = elements.nameInput.value.trim();
+    if (!playerName) {
+        alert('Please enter your name first!');
+        return false;
     }
 
-    // Player's move
-    gameBoard[clickedCellIndex] = currentPlayer;
-    clickedCell.textContent = currentPlayer;
-
-    // Check if player has won
-    if (checkWin()) {
-        celebrateWin();
-        status.textContent = `${playerName.name} wins!`;
-        gameActive = false;
-        updateScores(playerName.name);
-        return;
-    }
-
-    // Check for draw
-    if (gameBoard.every(cell => cell !== '')) {
-        status.textContent = "Game is a draw!";
-        gameActive = false;
-        updateScores('draw');
-        return;
-    }
-
-    // Computer's turn
-    currentPlayer = playerName.symbol === 'X' ? 'O' : 'X';
-    updateStatus();
+    // Save player information
+    gameState.player.name = playerName;
+    gameState.player.symbol = chosenSymbol;
+    gameState.computerSymbol = chosenSymbol === 'X' ? 'O' : 'X';
+    gameState.isPlayerTurn = true;
     
-    // Add a small delay before computer moves
-    setTimeout(makeComputerMove, 500);
+    // Show game board, hide setup screen
+    elements.playerSetup.style.display = 'none';
+    elements.gameBoard.style.display = 'block';
+    elements.scoreDisplay.nameDisplay.textContent = playerName;
+    
+    // Update status message
+    updateGameStatus();
+    return true;
 }
 
-// Make computer move
-function makeComputerMove() {
-    // Get all empty cells
-    const emptyCells = gameBoard.reduce((acc, cell, index) => {
-        if (cell === '') {
-            acc.push(index);
-        }
-        return acc;
-    }, []);
+// =============== GAME LOGIC ===============
+// Handle when a cell is clicked
+export function handleCellClick(clickedCell, cellIndex) {
+    // Ignore click if cell is taken or game is over or not player's turn
+    if (gameState.board[cellIndex] || !gameState.isActive || !gameState.isPlayerTurn) return false;
 
-    if (emptyCells.length === 0) return;
-
-    // Pick a random empty cell
-    const randomIndex = Math.floor(Math.random() * emptyCells.length);
-    const cellIndex = emptyCells[randomIndex];
-
-    // Make the move with opposite symbol of player
-    const computerSymbol = playerName.symbol === 'X' ? 'O' : 'X';
-    gameBoard[cellIndex] = computerSymbol;
-    document.querySelector(`[data-index="${cellIndex}"]`).textContent = computerSymbol;
-
-    // Check if computer has won
-    if (checkWin()) {
-        celebrateWin();
-        status.textContent = 'Computer wins!';
-        gameActive = false;
-        updateScores('Computer');
-        return;
+    // Make player's move
+    makeMove(cellIndex, gameState.player.symbol);
+    
+    // If game isn't over, let computer play
+    if (gameState.isActive) {
+        gameState.isPlayerTurn = false;
+        updateGameStatus();
+        setTimeout(makeComputerMove, 500); // Wait 0.5 seconds before computer moves
+        return true;
     }
-
-    // Check for draw
-    if (gameBoard.every(cell => cell !== '')) {
-        status.textContent = "Game is a draw!";
-        gameActive = false;
-        updateScores('draw');
-        return;
-    }
-
-    // Switch back to player's turn
-    currentPlayer = playerName.symbol;
-    updateStatus();
+    return false;
 }
 
-// Check for win conditions
-function checkWin() {
-    const winningConditions = [
-        [0, 1, 2], // Top row
-        [3, 4, 5], // Middle row
-        [6, 7, 8], // Bottom row
-        [0, 3, 6], // Left column
-        [1, 4, 7], // Middle column
-        [2, 5, 8], // Right column
-        [0, 4, 8], // Diagonal from top-left
-        [2, 4, 6]  // Diagonal from top-right
+// Make a move (works for both player and computer)
+export function makeMove(cellIndex, symbol) {
+    // Update board array and cell display
+    gameState.board[cellIndex] = symbol;
+    elements.cells[cellIndex].textContent = symbol;
+
+    // Check if this move won the game
+    if (checkForWin()) {
+        const winner = (symbol === gameState.player.symbol) ? 'player' : 'computer';
+        endGame(winner);
+        return true;
+    }
+
+    // Check if game is a draw
+    if (gameState.board.every(cell => cell !== '')) {
+        endGame('draw');
+        return true;
+    }
+    return false;
+}
+
+// Computer's turn
+export function makeComputerMove() {
+    // Find all empty cells
+    const emptyCells = gameState.board
+        .map((cell, index) => cell === '' ? index : null)
+        .filter(cell => cell !== null);
+
+    // Pick random empty cell
+    const computerChoice = emptyCells[Math.floor(Math.random() * emptyCells.length)];
+    const result = makeMove(computerChoice, gameState.computerSymbol);
+    
+    // If game is still active, it's player's turn
+    if (gameState.isActive) {
+        gameState.isPlayerTurn = true;
+        updateGameStatus();
+    }
+    return result;
+}
+
+// Check if current board has a winner
+export function checkForWin() {
+    // All possible winning combinations
+    const winPatterns = [
+        [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
+        [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
+        [0, 4, 8], [2, 4, 6]             // Diagonals
     ];
 
-    for (let i = 0; i <= 7; i++) {
-        const [a, b, c] = winningConditions[i];
-        if (
-            gameBoard[a] !== '' &&
-            gameBoard[a] === gameBoard[b] &&
-            gameBoard[a] === gameBoard[c]
-        ) {
+    // Check each winning pattern
+    for (const [a, b, c] of winPatterns) {
+        if (gameState.board[a] &&
+            gameState.board[a] === gameState.board[b] &&
+            gameState.board[a] === gameState.board[c]) {
+            
             // Highlight winning cells
-            document.querySelector(`[data-index="${a}"]`).classList.add('winner');
-            document.querySelector(`[data-index="${b}"]`).classList.add('winner');
-            document.querySelector(`[data-index="${c}"]`).classList.add('winner');
+            [a, b, c].forEach(index => {
+                elements.cells[index].classList.add('winner');
+            });
             return true;
         }
     }
     return false;
 }
 
-// Check if game is a draw
-function checkDraw() {
-    return gameBoard.every(cell => cell !== '');
+// End the game and update scores
+export function endGame(result) {
+    gameState.isActive = false;
+
+    // Update scores and display
+    if (result === 'player') {
+        gameState.scores.player++;
+        elements.scoreDisplay.player.textContent = gameState.scores.player;
+        elements.status.textContent = `${gameState.player.name} wins!`;
+        celebrateWin();
+        return 'player';
+    } else if (result === 'computer') {
+        gameState.scores.computer++;
+        elements.scoreDisplay.computer.textContent = gameState.scores.computer;
+        elements.status.textContent = 'Computer wins!';
+        return 'computer';
+    } else {
+        gameState.scores.draws++;
+        elements.scoreDisplay.draws.textContent = gameState.scores.draws;
+        elements.status.textContent = "It's a draw!";
+        return 'draw';
+    }
 }
 
-// Reset the game
-function resetGame() {
-    // Clear all scheduled confetti bursts
-    celebrationTimers.forEach(timer => clearTimeout(timer));
-    celebrationTimers = [];
+// Update the game status message
+export function updateGameStatus() {
+    elements.status.textContent = `${gameState.isPlayerTurn ? gameState.player.name : 'Computer'}'s turn`;
+}
+
+// Reset the game board
+export function resetGame() {
+    // Clear the board
+    gameState.board = ['', '', '', '', '', '', '', '', ''];
+    gameState.isActive = true;
+    gameState.isPlayerTurn = true;
     
-    // Stop any current confetti
+    // Reset the display
+    elements.cells.forEach(cell => {
+        cell.textContent = '';
+        cell.classList.remove('winner');
+    });
+    
+    // Stop any celebrations
     confetti.reset();
     
-    gameBoard = ['', '', '', '', '', '', '', '', ''];
-    gameActive = true;
-    currentPlayer = playerName.symbol;
-    document.querySelectorAll('.cell').forEach(cell => {
-        cell.textContent = '';
-        cell.classList.remove('winner'); // Remove winner highlight
+    // Update status
+    updateGameStatus();
+    return true;
+}
+
+// Celebrate a win with confetti
+export function celebrateWin() {
+    const colors = ['#ff0000', '#00ff00', '#0000ff'];
+    
+    confetti({
+        particleCount: 100,
+        spread: 70,
+        colors: colors,
+        origin: { y: 0.6 }
     });
-    updateStatus();
 }
 
-// Handle player symbol selection
-function handleSymbolSelection(symbol) {
-    const nameInput = document.getElementById('playerName');
-    const name = nameInput.value.trim();
+// =============== EVENT LISTENERS ===============
+// Initialize game when DOM is fully loaded
+document.addEventListener('DOMContentLoaded', () => {
+    // Set up symbol choice handlers
+    document.getElementById('chooseX').addEventListener('click', () => startGame('X'));
+    document.getElementById('chooseO').addEventListener('click', () => startGame('O'));
     
-    if (!name) {
-        alert('Please enter your name first!');
-        return;
-    }
-
-    playerName = {
-        name: name,
-        symbol: symbol
-    };
-
-    document.getElementById('playerSelection').style.display = 'none';
-    document.getElementById('gameContainer').style.display = 'block';
-    document.getElementById('playerNameDisplay').textContent = name;
+    // Set up game board click handlers
+    elements.cells.forEach((cell, index) => {
+        cell.addEventListener('click', () => handleCellClick(cell, index));
+    });
     
-    currentPlayer = symbol;
-    updateStatus();
-}
-
-function updateScores(winner) {
-    if (winner === playerName.name) {
-        scores.player++;
-        document.getElementById('playerScore').textContent = scores.player;
-    } else if (winner === 'Computer') {
-        scores.computer++;
-        document.getElementById('computerScore').textContent = scores.computer;
-    } else if (winner === 'draw') {
-        scores.draws++;
-        document.getElementById('drawScore').textContent = scores.draws;
-    }
-}
-
-// Add click event listeners to cells
-document.querySelectorAll('.cell').forEach((cell, index) => {
-    cell.addEventListener('click', () => handleMove(cell, index));
+    // Set up reset button handler
+    elements.resetBtn.addEventListener('click', resetGame);
 });
-
-// Add click event listener to reset button
-resetButton.addEventListener('click', resetGame);
-
-// Add click handlers for symbol selection
-chooseXButton.addEventListener('click', () => handleSymbolSelection('X'));
-chooseOButton.addEventListener('click', () => handleSymbolSelection('O'));
-
-// Function to celebrate a win
-function celebrateWin() {
-    // Create multiple bursts of confetti that repeat
-    const count = 200;
-    const defaults = {
-        origin: { y: 0.7 },
-        spread: 360,
-        ticks: 100,  // Increased ticks for longer duration
-        gravity: 0,
-        decay: 0.97, // Slower decay for longer-lasting confetti
-        startVelocity: 30,
-    };
-
-    function fire(particleRatio, opts) {
-        confetti({
-            ...defaults,
-            ...opts,
-            particleCount: Math.floor(count * particleRatio),
-        });
-    }
-
-    // Function to create one round of celebrations
-    function celebrationRound(delay) {
-        const timer = setTimeout(() => {
-            fire(0.25, {
-                spread: 26,
-                startVelocity: 55,
-            });
-            fire(0.2, {
-                spread: 60,
-            });
-            fire(0.35, {
-                spread: 100,
-                decay: 0.94,
-                scalar: 0.8,
-            });
-            fire(0.1, {
-                spread: 120,
-                startVelocity: 25,
-                decay: 0.95,
-                scalar: 1.2,
-            });
-            fire(0.1, {
-                spread: 120,
-                startVelocity: 45,
-            });
-        }, delay);
-        celebrationTimers.push(timer);
-    }
-
-    // Trigger 5 rounds of celebration with delays
-    for (let i = 0; i < 5; i++) {
-        celebrationRound(i * 1500); // Space out each round by 1.5 seconds
-    }
-}
-
-// Start the game
-// initGame();

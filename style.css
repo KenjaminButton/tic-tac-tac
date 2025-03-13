@@ -1,4 +1,5 @@
-/* Basic reset and body styles */
+/* =============== BASIC PAGE LAYOUT =============== */
+/* Center everything on the page */
 body {
     font-family: Arial, sans-serif;
     display: flex;
@@ -9,100 +10,57 @@ body {
     background-color: #f0f0f0;
 }
 
+/* Main container for all game elements */
 .container {
-    text-align: center;
     width: 100%;
     max-width: 600px;
     padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    text-align: center;
 }
 
+/* Game title styling */
 h1 {
     color: #333;
-    margin-bottom: 30px;
     font-size: 2.5em;
-    text-align: center;
-    width: 100%;
-}
-
-/* Status message styles */
-.status {
-    margin: 20px 0;
-    font-size: 24px;
-    color: #333;
-    font-weight: 500;
-}
-
-/* Game board styles */
-.board {
-    display: grid;
-    grid-template-columns: repeat(3, 100px);
-    gap: 5px;
-    margin: 20px auto;
-    justify-content: center;
-    width: fit-content;
-}
-
-/* Individual cell styles */
-.cell {
-    width: 100px;
-    height: 100px;
-    background-color: white;
-    border: 2px solid #333;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 40px;
-    cursor: pointer;
-}
-
-/* Winning cell highlight */
-.cell.winner {
-    background-color: rgba(255, 0, 0, 0.2);
-    border: 2px solid red;
-}
-
-/* Player Selection Screen */
-.player-selection {
-    text-align: center;
     margin-bottom: 30px;
 }
 
-.player-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
+/* =============== PLAYER SETUP SCREEN =============== */
+/* Container for player name and symbol selection */
+.player-selection {
+    margin-bottom: 30px;
 }
 
+/* Style for the name input section */
 .name-input {
     margin: 20px 0;
 }
 
 .name-input label {
     display: block;
-    margin-bottom: 10px;
     font-size: 18px;
     color: #333;
+    margin-bottom: 10px;
 }
 
+/* Make the name input field look nice */
 .name-input input {
+    width: 200px;
     padding: 10px 15px;
     font-size: 16px;
     border: 2px solid #333;
     border-radius: 5px;
-    width: 200px;
     text-align: center;
 }
 
+/* Highlight the input field when selected */
 .name-input input:focus {
     outline: none;
     border-color: #666;
     box-shadow: 0 0 5px rgba(0,0,0,0.2);
 }
 
+/* Style the X/O choice buttons */
 .symbol-buttons {
     display: flex;
     gap: 20px;
@@ -113,19 +71,58 @@ h1 {
 .symbol-buttons button {
     font-size: 24px;
     padding: 15px 30px;
-    cursor: pointer;
     background-color: white;
     border: 2px solid #333;
     border-radius: 5px;
+    cursor: pointer;
     transition: all 0.3s ease;
 }
 
+/* Button hover effect */
 .symbol-buttons button:hover {
     background-color: #333;
     color: white;
 }
 
-/* Score Board */
+/* =============== GAME BOARD =============== */
+/* The game status message */
+.status {
+    font-size: 24px;
+    color: #333;
+    margin: 20px 0;
+}
+
+/* The actual tic-tac-toe grid */
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px); /* 3 columns of 100px each */
+    gap: 5px;
+    margin: 20px auto;
+    width: fit-content;
+}
+
+/* Individual squares in the grid */
+.cell {
+    width: 100px;
+    height: 100px;
+    background-color: white;
+    border: 2px solid #333;
+    font-size: 40px;
+    cursor: pointer;
+    
+    /* Center X and O in the cell */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Highlight winning cells */
+.cell.winner {
+    background-color: rgba(255, 0, 0, 0.2);
+    border-color: red;
+}
+
+/* =============== SCORE BOARD =============== */
 .score-board {
     display: flex;
     justify-content: center;
@@ -142,7 +139,7 @@ h1 {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Reset button styles */
+/* =============== RESET BUTTON =============== */
 #resetBtn {
     padding: 10px 20px;
     font-size: 16px;

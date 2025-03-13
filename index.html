@@ -1,24 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Basic page setup -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kenjamin Button's Tic Tac Toe</title>
+    
+    <!-- Link to our CSS file for styling -->
     <link rel="stylesheet" href="style.css">
+    
+    <!-- Confetti library for win celebrations -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 <body>
+    <!-- Main container for all game elements -->
     <div class="container">
         <h1>Kenjamin Button's Tic Tac Toe</h1>
         
-        <!-- Player Selection Screen -->
+        <!-- Player Setup Screen (shown first) -->
         <div id="playerSelection" class="player-selection">
             <h2>Player Setup</h2>
             <div class="player-form">
+                <!-- Name input field -->
                 <div class="name-input">
                     <label for="playerName">Enter Your Name:</label>
                     <input type="text" id="playerName" placeholder="Your name" required>
                 </div>
+                
+                <!-- Symbol selection (X or O) -->
                 <h3>Choose Your Symbol</h3>
                 <div class="symbol-buttons">
                     <button id="chooseX">X</button>
@@ -27,9 +36,9 @@
             </div>
         </div>
 
-        <!-- Game board container (initially hidden) -->
+        <!-- Game Board Screen (hidden initially) -->
         <div id="gameContainer" style="display: none;">
-            <!-- Score Board -->
+            <!-- Score Display -->
             <div id="scoreBoard" class="score-board">
                 <div class="score-item">
                     <span id="playerNameDisplay"></span>: <span id="playerScore">0</span>
@@ -41,8 +50,14 @@
                     <span>Draw(s)</span>: <span id="drawScore">0</span>
                 </div>
             </div>
+            
+            <!-- Game Status Message -->
             <div id="status" class="status"></div>
+            
+            <!-- The Game Board Grid -->
             <div id="board" class="board">
+                <!-- 9 cells for the tic-tac-toe grid -->
+                <!-- data-index helps us track which cell is which -->
                 <div class="cell" data-index="0"></div>
                 <div class="cell" data-index="1"></div>
                 <div class="cell" data-index="2"></div>
@@ -53,9 +68,13 @@
                 <div class="cell" data-index="7"></div>
                 <div class="cell" data-index="8"></div>
             </div>
+            
+            <!-- Reset Game Button -->
             <button id="resetBtn">Reset Game</button>
         </div>
     </div>
-    <script src="script.js"></script>
+    
+    <!-- Link to our JavaScript file (at the end for better page loading) -->
+    <script type="module" src="script.js"></script>
 </body>
 </html>
